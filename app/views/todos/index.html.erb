@@ -5,17 +5,14 @@
 
   <% content_for :title, "Todos" %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Todos</h1>
-    <%= link_to "New todo", new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <div class="flex justify-center items-center mb-8">
+    <h1 class="font-bold text-4xl tracking-wider">Today</h1>
   </div>
 
-  <div id="todos" class="min-w-full">
+  <div id="todos" class="min-w-full flex flex-col justify-center items-center">
     <% @todos.each do |todo| %>
       <%= render todo %>
-      <p>
-        <%= link_to "Show this todo", todo, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
     <% end %>
+    <%= link_to "New todo", new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 </div>
