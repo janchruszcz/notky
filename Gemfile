@@ -70,3 +70,5 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "heroicon"
 
 gem "ranked-model", "~> 0.4.9"
+
+gem "requestjs-rails", "~> 0.0.11"
