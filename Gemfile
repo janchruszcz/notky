@@ -68,3 +68,5 @@ end
 
 gem "tailwindcss-rails", "~> 2.6"
 gem "heroicon"
+
+gem "ranked-model", "~> 0.4.9"
