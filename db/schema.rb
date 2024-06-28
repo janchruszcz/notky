@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_28_135129) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_135911) do
   create_table "lists", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "row_order"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_135129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "list_id"
+    t.integer "row_order"
     t.index ["list_id"], name: "index_todos_on_list_id"
   end
 
