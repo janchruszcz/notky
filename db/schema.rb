@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_26_132539) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_135129) do
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "todos", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -18,6 +24,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_132539) do
     t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "list_id"
+    t.index ["list_id"], name: "index_todos_on_list_id"
   end
 
+  add_foreign_key "todos", "lists"
 end
