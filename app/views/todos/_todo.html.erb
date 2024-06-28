@@ -1,26 +1,13 @@
-<div id="<%= dom_id todo %>" class="bg-yellow-200 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
-  <div class="flex justify-between">
+<div id="<%= dom_id todo %>" class="bg-opacity-100 p-3 rounded shadow-lg w-54 my-3">
+  <div class="flex justify-between items-center">
     <%= link_to edit_todo_path(todo), class: "h-5 w-5 text-sky-500" do %>
       <%= heroicon('pencil') %>
     <% end %>
+    <p class="text-center font-medium">
+      <%= todo.title %>
+    </p>
     <%= link_to todo, method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
       <%= heroicon('trash') %>
     <% end %>
-  </div>
-  
-  <p class="text-center font-medium mb-4">
-    <%= todo.title %>
-  </p>
-
-  <p class="mb-4">
-    <%= todo.description %>
-  </p>
-
-  <p class="absolute bottom-2 left-2 text-sm">
-    <%= todo.due_date.strftime("%Y-%m-%d %H:%M") unless todo.due_date.nil? %>
-  </p>
-
-  <div class="absolute bottom-2 right-2 flex items-center">
-    <input type="checkbox" <%= todo.completed ? 'checked' : '' %> class="form-checkbox h-5 w-5 text-gray-700">
   </div>
 </div>
