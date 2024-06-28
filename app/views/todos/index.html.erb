@@ -4,15 +4,14 @@
   <% end %>
 
   <% content_for :title, "Todos" %>
+  <h1 class="text-4xl font-medium text-center my-5 tracking-wider">Today</h1>
 
-  <div class="flex justify-center items-center mb-8">
-    <h1 class="font-bold text-4xl tracking-wider">Today</h1>
-  </div>
-
-  <div id="todos" class="min-w-full flex flex-col justify-center items-center">
+  <div class="grid grid-cols-3 gap-4">
     <% @todos.each do |todo| %>
       <%= render todo %>
     <% end %>
-    <%= link_to "New todo", new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
+
+  <%= link_to "New todo", new_todo_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+</div>
 </div>
