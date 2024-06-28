@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -7,7 +6,16 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "todos#index"
+  root "dashboard#index"
 
-  resources :todos
+  resources :lists do
+    member do
+      put :sort
+    end
+  end
+  resources :todos do
+    member do
+      put :sort
+    end
+  end
 end

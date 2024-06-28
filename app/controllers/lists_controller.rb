@@ -3,7 +3,7 @@ class ListsController < ApplicationController
 
   # GET /lists or /lists.json
   def index
-    @lists = List.all
+    @lists = List.rank(:row_order)
   end
 
   # GET /lists/1 or /lists/1.json
@@ -55,6 +55,16 @@ class ListsController < ApplicationController
       format.html { redirect_to lists_url, notice: "List was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def sort
+    @list = List.find(params[:id])
+    @list.update(row_order_position: params[:row_order_position])
+    head :no_content
+  end
+
+  def list
+    @todos = @list.todos.rank(:row_order)
   end
 
   private

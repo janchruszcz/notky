@@ -1,7 +1,16 @@
-<div id="<%= dom_id list %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
+<div id="<%= dom_id list %>" class="bg-yellow-200 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
+  <div class="flex justify-end">
+    <%= link_to list, method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
+      <%= heroicon('trash') %>
+    <% end %>
+  </div>
+  
+  <p class="text-center font-medium mb-4">
     <%= list.title %>
   </p>
 
+  <% list.todos.each do |todo| %>
+    <p><%= todo.title %></p>
+    <!-- Add more code here to display other properties of the todo -->
+  <% end %>
 </div>

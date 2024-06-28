@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all
+    @todos = Todo.rank(:row_order)
   end
 
   # GET /todos/1 or /todos/1.json
@@ -55,6 +55,12 @@ class TodosController < ApplicationController
       format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def sort
+    @todo = Todo.find(params[:id])
+    @todo.update(row_order_position: params[:row_order_position], list_id: params[:list_id])
+    head :no_content
   end
 
   private
