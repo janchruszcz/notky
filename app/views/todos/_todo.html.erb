@@ -1,13 +1,18 @@
 <div id="<%= dom_id todo %>" class="bg-opacity-100 p-3 rounded shadow-lg w-54 my-3">
   <div class="flex justify-between items-center">
-    <%= link_to edit_todo_path(todo), class: "h-5 w-5 text-sky-500" do %>
-      <%= heroicon('pencil') %>
+
+    <% frame_id = dom_id(todo, "title_turbo_frame")%>
+    <%= form_with model: todo, class: "contents", data: { turbo_frame: frame_id } do %>
+      <%= turbo_frame_tag frame_id do %>
+        <p class="text-center font-medium">
+          <%= link_to todo.title, edit_todo_path(todo) %>
+        </p>
+      <% end %>
     <% end %>
-    <p class="text-center font-medium">
-      <%= todo.title %>
-    </p>
+
     <%= button_to todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
       <%= heroicon('trash') %>
     <% end %>
+
   </div>
 </div>
