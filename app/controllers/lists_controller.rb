@@ -26,7 +26,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       if @list.save
         format.html { redirect_to list_url(@list), notice: "List was successfully created." }
-        format.json { render :show, status: :created, location: @list }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @list.errors, status: :unprocessable_entity }
