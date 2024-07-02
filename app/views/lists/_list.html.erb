@@ -1,6 +1,6 @@
 <div id="<%= dom_id list %>" class="min-h-36 bg-yellow-200 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
   <div class="flex justify-end">
-    <%= link_to list, method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
+    <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
       <%= heroicon('trash') %>
     <% end %>
   </div>

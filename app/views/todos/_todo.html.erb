@@ -6,7 +6,7 @@
     <p class="text-center font-medium">
       <%= todo.title %>
     </p>
-    <%= link_to todo, method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
+    <%= button_to todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
       <%= heroicon('trash') %>
     <% end %>
   </div>
