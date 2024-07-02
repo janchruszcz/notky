@@ -1,4 +1,4 @@
-<div id="<%= dom_id list %>" class="min-h-36 bg-yellow-200 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
+<div id="<%= dom_id list %>" class="min-h-36 bg-yellow-200 bg-opacity-90 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
   <div class="flex justify-end">
     <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
       <%= heroicon('trash') %>
@@ -9,7 +9,7 @@
     <%= list.title %>
   </p>
 
-  <ul data-controller="sortable" data-sortable-group-value="todos" data-sortable-list-id="<%=list.id%>">
+  <ul id="todos_<%= list.id %>" data-controller="sortable" data-sortable-group-value="todos" data-sortable-list-id="<%=list.id%>">
     <% list.todos.rank(:row_order).each do |todo| %>
       <li data-sortable-id="<%= todo.id %>" data-sortable-update-url="<%= sort_todo_path(todo) %>">
         <%= render todo %>
@@ -18,10 +18,8 @@
   </ul>
 
   <div class="flex justify-center mt-8">
-    <%= link_to new_todo_path(list_id: list.id) do %>
-      <button class="h-7 w-7 bg-green-500 text-white rounded-full shadow-lg">
-        <%= heroicon('plus') %>
-      </button>
+    <%= button_to todos_path, params: { todo: { title: 'New todo', list_id: list.id } }, class: "h-7 w-7 bg-green-500 text-white rounded-full shadow-lg" do %>
+      <%= heroicon('plus') %>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,1 @@
+<%= turbo_stream.append("todos_#{@todo.list.id}", partial: 'todos/todo', locals: { todo: @todo }) %>

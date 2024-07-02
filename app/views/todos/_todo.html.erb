@@ -1,7 +1,7 @@
 <div id="<%= dom_id todo %>" class="bg-opacity-100 p-3 rounded shadow-lg w-54 my-3">
   <div class="flex justify-between items-center">
 
-    <% frame_id = dom_id(todo, "title_turbo_frame")%>
+    <% frame_id = dom_id(todo, "title_turbo_frame") %>
     <%= form_with model: todo, class: "contents", data: { turbo_frame: frame_id } do %>
       <%= turbo_frame_tag frame_id do %>
         <p class="text-center font-medium">

@@ -25,8 +25,8 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
-        format.json { render :show, status: :created, location: @todo }
+        format.html { redirect_to root_url, notice: "Todo was successfully created." }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
@@ -71,6 +71,6 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:title, :description, :completed, :due_date)
+      params.require(:todo).permit(:title, :description, :completed, :due_date, :list_id)
     end
 end
