@@ -10,4 +10,4 @@
   <% end %>
 <% end %>
 
-<%= turbo_stream.append("lists", partial: 'lists/list', locals: { list: @list }) %>
+<%= turbo_stream.replace("todo_#{@todo.id}", partial: 'todos/todo', locals: { todo: @todo }) %>

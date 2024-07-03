@@ -16,6 +16,7 @@
   <body class="bg-gradient-to-b from-slate-300 via-slate-200 to-slate-100">
     <main class="container mx-auto mt-5 px-5 flex">
       <%= turbo_frame_tag "modal" %>
+      <%= render 'layouts/flash'%>
       <%= yield %>
     </main>
   </body>

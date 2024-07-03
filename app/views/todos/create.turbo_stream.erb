@@ -1,1 +1,13 @@
+<% if notice %>
+  <%= turbo_stream.append 'notifications' do %>
+    <%= render 'layouts/notice' %>
+  <% end %>
+<% end %>
+ 
+<% if alert %>
+  <%= turbo_stream.append 'notifications' do %>
+    <%= render 'layouts/alert' %>
+  <% end %>
+<% end %>
+
 <%= turbo_stream.append("todos_#{@todo.list.id}", partial: 'todos/todo', locals: { todo: @todo }) %>
