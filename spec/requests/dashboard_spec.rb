@@ -27,10 +27,12 @@ RSpec.describe "Dashboard", type: :request do
       list_params = { title: "Home" }
 
       expect {
-        post "/lists", params: { list: list_params }
+        post lists_path(format: :turbo_stream), params: { list: list_params }
       }.to change(List, :count).by(1)
 
       expect(response).to have_http_status(200)
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include('<turbo-stream action="append" target="lists">')
       expect(response.body).to include(list_params[:title])
 
     end
@@ -41,10 +43,12 @@ RSpec.describe "Dashboard", type: :request do
       list = List.create(title: "Home")
       
       expect {
-        delete "/lists/#{list.id}"
+        delete list_path(list, format: :turbo_stream)
       }.to change(List, :count).by(-1)
 
       expect(response).to have_http_status(200)
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include("<turbo-stream action=\"remove\" target=\"list_#{list.id}\">")
       expect(response.body).not_to include(list.title)
     end
   end
@@ -56,10 +60,12 @@ RSpec.describe "Dashboard", type: :request do
       todo_params = { title: "Clean the house", list_id: list.id }
 
       expect {
-        post "/todos", params: { todo: todo_params }
+        post todos_path(format: :turbo_stream), params: { todo: todo_params }
       }.to change(Todo, :count).by(1)
 
       expect(response).to have_http_status(200)
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include("<turbo-stream action=\"append\" target=\"todos_#{list.id}\">")
       expect(response.body).to include(todo_params[:title])
     end
   end
@@ -71,9 +77,11 @@ RSpec.describe "Dashboard", type: :request do
       todo = list.todos.create(title: "Milk")
       updated_title = "Oranges"
 
-      patch "/todos/#{todo.id}", params: { todo: { title: updated_title } }
+      patch todo_path(todo, format: :turbo_stream), params: { todo: { title: updated_title } }
 
       expect(response).to have_http_status(200)
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include("<turbo-stream action=\"replace\" target=\"todo_#{todo.id}\">")
       expect(response.body).to include(updated_title)
     end
   end
@@ -85,10 +93,12 @@ RSpec.describe "Dashboard", type: :request do
       todo = list.todos.create(title: "Milk")
 
       expect {
-        delete "/todos/#{todo.id}"
+        delete todo_path(todo, format: :turbo_stream)
       }.to change(Todo, :count).by(-1)
 
       expect(response).to have_http_status(200)
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include("<turbo-stream action=\"remove\" target=\"todo_#{todo.id}\">")
       expect(response.body).not_to include(todo.title)
     end
   end
