@@ -1,13 +1,21 @@
 <div id="<%= dom_id list %>" class="min-h-36 bg-yellow-200 bg-opacity-90 p-5 rounded shadow-lg w-80 my-4 relative mx-auto">
-  <div class="flex justify-end">
-    <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
-      <%= heroicon('trash') %>
-    <% end %>
+  <div class="flex items-center justify-between">
+    <div>
+      <%= button_to edit_list_path(list), method: :get, class: "h-5 w-5 text-sky-400" do %>
+        <%= heroicon('pencil') %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600" do %>
+        <%= heroicon('trash') %>
+      <% end %>
+    </div>
   </div>
   
-  <p class="text-center font-medium mb-4">
+  <h3 class="text-lg text-center font-medium mb-4">
     <%= list.title %>
-  </p>
+  </h3>
 
   <ul id="todos_<%= list.id %>" data-controller="sortable" data-sortable-group-value="todos" data-sortable-list-id="<%=list.id%>">
     <% list.todos.rank(:row_order).each do |todo| %>
