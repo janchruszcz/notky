@@ -1,24 +1,62 @@
-# README
+# Task Tango
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
+This README provides information on how to set up and run a simple, personal sticky notes/corkboard-like todo app made with Ruby on Rails and Hotwire.
 
-* Ruby version
+## Prerequisites
 
-* System dependencies
+Before getting started, make sure you have the following installed:
 
-* Configuration
+- Ruby version X.X.X
+- Rails version X.X.X
+- PostgreSQL
 
-* Database creation
+## Installation
 
-* Database initialization
+1. Clone the repository:
 
-* How to run the test suite
+    ```shell
+    git clone https://github.com/your-username/todo-app.git
+    ```
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Install the required gems:
 
-* Deployment instructions
+    ```shell
+    bundle install
+    ```
 
-* ...
+3. Set up the database:
+
+    ```shell
+    rails db:create
+    rails db:migrate
+    ```
+
+## Usage
+
+To start the application, run the following command:
+
+```shell
+rails server
+```
+
+Open your web browser and visit `http://localhost:3000` to access the app.
+
+## Features
+
+- Create, edit, and delete sticky notes
+- Drag and drop functionality for organizing notes
+- Real-time updates using Hotwire
+
+## Contributing
+
+Contributions are welcome! Please follow the guidelines outlined in [CONTRIBUTING.md](link-to-contributing-file).
+
+## License
+
+This project is licensed under the [MIT License](link-to-license-file).
+
+## Contact
+
+If you have any questions or suggestions, feel free to reach out to us at [email@example.com](mailto:email@example.com).
