@@ -24,12 +24,8 @@
   <div class="flex justify-between items-center">
 
     <div>
-      <%= form_with model: todo, class: "contents", data: { turbo_frame: dom_id(todo, "due_date") } do %>
-        <%= turbo_frame_tag dom_id(todo, "due_date") do %>
-          <p class="text-xs text-gray-500">
-            <%= link_to todo.due_date? ? todo.due_date.strftime("%b %d, %Y") : '2001', edit_todo_path(todo) %>
-          </p>
-        <% end%>
+      <%= form_with model: todo, class: "contents" do |form| %>
+        <%= form.date_field :due_date, class: "border-none", data: { controller: "flatpickr" } %>
       <% end %>
     </div>
 

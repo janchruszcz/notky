@@ -1,15 +1,7 @@
 
 <%= form_with model: todo, class: "contents" do |form| %>
   <%= turbo_frame_tag dom_id(todo, "title") do %>
-    <div class="my-5">
-      <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
-  <% end %>
-
-  <%= turbo_frame_tag dom_id(todo, "due_date") do %>
-    <div class="my-5">
-      <%= form.date_field :due_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   <% end %>
 <% end %>
 
