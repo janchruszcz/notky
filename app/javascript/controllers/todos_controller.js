@@ -1,12 +1,22 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="todos"
 export default class extends Controller {
+  static targets = ["checkbox", "paragraph"]
+
   connect() {
-  
+    this.updateCrossOut();
   }
 
-  submit() {
-    this.element.requestSubmit();
+  toggleCrossOut() {
+    this.updateCrossOut();
+  }
+
+  updateCrossOut() {
+    const isChecked = this.checkboxTarget.checked;
+    if (isChecked) {
+      this.paragraphTarget.classList.add('line-through');
+    } else {
+      this.paragraphTarget.classList.remove('line-through');
+    }
   }
 }

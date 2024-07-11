@@ -1,9 +1,9 @@
-<div id="<%= dom_id todo %>" class="flex flex-col gap-3 bg-opacity-100 p-3 rounded shadow-lg w-54 my-3">
+<div id="<%= dom_id todo %>" class="flex flex-col gap-3 bg-opacity-100 p-3 rounded shadow-lg w-54 my-3" data-controller="todos">
   <div class="flex justify-between items-center">
 
     <%= form_with model: todo, class: "contents", data: { turbo_frame: dom_id(todo, "title") } do %>
       <%= turbo_frame_tag dom_id(todo, "title"), data: { controller: "inline-edit"} do %>
-        <p class="py-3 pl-2 my-1 text-center text-sm font-medium">
+        <p data-todos-target="paragraph" class="py-3 pl-2 my-1 text-center text-sm font-medium">
           <%= link_to todo.title, edit_todo_path(todo) %>
         </p>
       <% end %>
@@ -11,9 +11,9 @@
 
     <div class="flex items-center gap-3">
       <div>
-        <%= form_with model: todo, data: { controller: "todos" }, class: "contents", local: false do |form| %>
+        <%= form_with model: todo, class: "contents", data: { controller: "auto-submit" }, local: false do |form| %>
           <%= turbo_frame_tag dom_id(todo, "completed") do %>
-            <%= form.check_box :completed, id: dom_id(todo, "completed"), data: { action: "todos#submit" } %>
+            <%= form.check_box :completed, id: dom_id(todo, "completed"), data: { action: "auto-submit#submit click->todos#toggleCrossOut", "todos-target": "checkbox" } %>
           <% end %>
         <% end %>
       </div>
