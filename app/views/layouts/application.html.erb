@@ -15,9 +15,10 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-5 px-5 flex">
-      <%= turbo_frame_tag "modal" %>
-      <%= render 'layouts/flash'%>
+    <main class='container mx-auto mt-5 px-5 flex flex-col h-full'>
+      <%= turbo_frame_tag 'modal' %>
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/navbar' %>
       <%= yield %>
     </main>
   </body>
