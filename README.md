@@ -2,7 +2,7 @@
 
 ## About
 
-This README provides information on how to set up and run a simple, personal sticky notes/corkboard-like todo app made with Ruby on Rails and Hotwire.
+notky is a simple sticky notes/corkboard-like todo app. It was designed for personal use and built with Ruby on Rails with Hotwire.
 
 ## Prerequisites
 
