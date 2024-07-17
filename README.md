@@ -1,4 +1,4 @@
-# Task Tango
+# notky
 
 ## About
 
@@ -8,8 +8,8 @@ This README provides information on how to set up and run a simple, personal sti
 
 Before getting started, make sure you have the following installed:
 
-- Ruby version X.X.X
-- Rails version X.X.X
+- Ruby version 3.2.2
+- Rails version 7.1.3.4
 - PostgreSQL
 
 ## Installation
@@ -17,7 +17,7 @@ Before getting started, make sure you have the following installed:
 1. Clone the repository:
 
     ```shell
-    git clone https://github.com/your-username/todo-app.git
+    git clone https://github.com/janchruszcz/notky.git
     ```
 
 2. Install the required gems:
@@ -38,7 +38,7 @@ Before getting started, make sure you have the following installed:
 To start the application, run the following command:
 
 ```shell
-rails server
+./bin/dev
 ```
 
 Open your web browser and visit `http://localhost:3000` to access the app.
@@ -49,14 +49,6 @@ Open your web browser and visit `http://localhost:3000` to access the app.
 - Drag and drop functionality for organizing notes
 - Real-time updates using Hotwire
 
-## Contributing
-
-Contributions are welcome! Please follow the guidelines outlined in [CONTRIBUTING.md](link-to-contributing-file).
-
 ## License
 
 This project is licensed under the [MIT License](link-to-license-file).
-
-## Contact
-
-If you have any questions or suggestions, feel free to reach out to us at [email@example.com](mailto:email@example.com).
