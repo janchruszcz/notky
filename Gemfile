@@ -83,3 +83,4 @@ gem "ranked-model", "~> 0.4.9"
 
 # Slim JS requests
 gem "requestjs-rails", "~> 0.0.11"
+gem "devise", "~> 4.9"
