@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    @lists = List.rank(:row_order)
-    @todos = Todo.rank(:row_order)
+    @lists = current_user.lists.rank(:row_order)
+    # @todos = Todo.rank(:row_order)
   end
 end

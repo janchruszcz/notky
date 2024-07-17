@@ -7,7 +7,7 @@
     </div>
 
     <div>
-      <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600" do %>
+      <%= button_to list_path(list), method: :delete, data: { confirm: 'Are you sure?' }, id: "delete-list-#{list.id}", class: "h-5 w-5 text-red-600" do %>
         <%= heroicon('trash') %>
       <% end %>
     </div>

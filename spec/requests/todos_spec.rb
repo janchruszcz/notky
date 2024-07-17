@@ -1,19 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "Todos", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+RSpec.describe 'Todos', type: :request do
+  let(:user) { create(:user) }
+
+  before do
+    login_as(user, scope: :user)
   end
 
-  describe "POST /todos" do
-    it "creates a new todo" do
-      list = List.create(title: "Home")
+  describe 'POST /todos' do
+    it 'creates a new todo' do
+      list = List.create(title: 'Home', user_id: user.id)
 
-      todo_params = { title: "Clean the house", list_id: list.id }
+      todo_params = { title: 'Clean the house', list_id: list.id }
 
-      expect {
+      expect do
         post todos_path(format: :turbo_stream), params: { todo: todo_params }
-      }.to change(Todo, :count).by(1)
+      end.to change(Todo, :count).by(1)
 
       expect(response).to have_http_status(200)
       expect(response.media_type).to eq Mime[:turbo_stream]
@@ -22,12 +24,12 @@ RSpec.describe "Todos", type: :request do
     end
   end
 
-  describe "PATCH /todos/:id" do
-    it "updates an existing todo" do
-      list = List.create(title: "Groceries")
+  describe 'PATCH /todos/:id' do
+    it 'updates an existing todo' do
+      list = List.create(title: 'Groceries', user_id: user.id)
 
-      todo = list.todos.create(title: "Milk")
-      updated_title = "Oranges"
+      todo = list.todos.create(title: 'Milk')
+      updated_title = 'Oranges'
 
       patch todo_path(todo, format: :turbo_stream), params: { todo: { title: updated_title } }
 
@@ -38,15 +40,15 @@ RSpec.describe "Todos", type: :request do
     end
   end
 
-  describe "DELETE /todos/:id" do
-    it "deletes an existing todo" do
-      list = List.create(title: "Groceries")
+  describe 'DELETE /todos/:id' do
+    it 'deletes an existing todo' do
+      list = List.create(title: 'Groceries', user_id: user.id)
 
-      todo = list.todos.create(title: "Milk")
+      todo = list.todos.create(title: 'Milk')
 
-      expect {
+      expect do
         delete todo_path(todo, format: :turbo_stream)
-      }.to change(Todo, :count).by(-1)
+      end.to change(Todo, :count).by(-1)
 
       expect(response).to have_http_status(200)
       expect(response.media_type).to eq Mime[:turbo_stream]

@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full h-fit">
 
   <div>
     <ul id="lists" data-controller="sortable" class="grid grid-cols-3 gap-4">
@@ -11,7 +11,7 @@
   </div>
 
   <div class="flex justify-center my-8">
-    <%= button_to new_list_path, method: :get, data: { turbo_frame: 'modal' }, class: "h-10 w-10 bg-green-500 text-white rounded-full shadow-lg" do %>
+    <%= button_to new_list_path, id: 'add-list', method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "h-10 w-10 bg-green-500 text-white rounded-full shadow-lg" do %>
       <%= heroicon('plus') %>
     <% end %>
   </div>
