@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :set_todo, only: %i[show edit update destroy]
 
   def index
     @todos = Todo.rank(:row_order)
@@ -20,9 +20,9 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.turbo_stream { flash[:notice] = "Todo was successfully created." }
+        format.turbo_stream { flash[:notice] = 'Todo was successfully created.' }
       else
-        format.turbo_stream { flash[:alert] = "Todo was not created." }
+        format.turbo_stream { flash[:alert] = 'Todo was not created.' }
       end
     end
   end
@@ -30,9 +30,9 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.turbo_stream { flash[:notice] = "Todo was successfully updated." }
+        format.turbo_stream { flash[:notice] = 'Todo was successfully updated.' }
       else
-        format.turbo_stream { flash[:alert] = "Todo was not updated." }
+        format.turbo_stream { flash[:alert] = 'Todo was not updated.' }
       end
     end
   end
@@ -41,7 +41,7 @@ class TodosController < ApplicationController
     @todo.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash[:notice] = "Todo was successfully destroyed." }
+      format.turbo_stream { flash[:notice] = 'Todo was successfully destroyed.' }
     end
   end
 
@@ -53,11 +53,11 @@ class TodosController < ApplicationController
 
   private
 
-    def set_todo
-      @todo = Todo.find(params[:id])
-    end
+  def set_todo
+    @todo = Todo.find(params[:id])
+  end
 
-    def todo_params
-      params.require(:todo).permit(:title, :description, :completed, :due_date, :list_id)
-    end
+  def todo_params
+    params.require(:todo).permit(:title, :description, :completed, :due_date, :list_id)
+  end
 end

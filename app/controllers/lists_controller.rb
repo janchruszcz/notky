@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[ show edit update destroy ]
+  before_action :set_list, only: %i[show edit update destroy]
 
   def index
     @lists = List.rank(:row_order)
@@ -20,7 +20,7 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.turbo_stream { flash[:notice] = "List was successfully created." }
+        format.turbo_stream { flash[:notice] = 'List was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -30,9 +30,9 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.turbo_stream { flash[:notice] = "List was successfully updated." }
+        format.turbo_stream { flash[:notice] = 'List was successfully updated.' }
       else
-        format.turbo_stream { flash[:alert] = "List was not updated." }
+        format.turbo_stream { flash[:alert] = 'List was not updated.' }
       end
     end
   end
@@ -41,7 +41,7 @@ class ListsController < ApplicationController
     @list.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash[:notice] = "List was successfully destroyed." }
+      format.turbo_stream { flash[:notice] = 'List was successfully destroyed.' }
     end
   end
 
@@ -57,11 +57,11 @@ class ListsController < ApplicationController
 
   private
 
-    def set_list
-      @list = List.find(params[:id])
-    end
+  def set_list
+    @list = List.find(params[:id])
+  end
 
-    def list_params
-      params.require(:list).permit(:title)
-    end
+  def list_params
+    params.require(:list).permit(:title)
+  end
 end
