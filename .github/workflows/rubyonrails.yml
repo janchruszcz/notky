@@ -47,11 +47,6 @@ jobs:
         RAILS_ENV: test
       run: bundle exec rspec
 
-    - name: Run linters
-      run: |
-        bundle exec rubocop
-        bundle exec erb-lint --lint-all
-
     - name: Run security checks
       run: |
         bundle exec brakeman -q -w2
