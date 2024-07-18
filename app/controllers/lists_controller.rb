@@ -1,19 +1,11 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[show edit update destroy]
-
-  def index
-    @lists = List.rank(:row_order)
-  end
-
-  def show
-  end
+  before_action :set_list, only: %i[edit update destroy]
 
   def new
     @list = List.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @list = List.new(list_params)
@@ -22,7 +14,7 @@ class ListsController < ApplicationController
       if @list.save
         format.turbo_stream { flash[:notice] = 'List was successfully created.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { flash[:alert] = 'List was not created.' }
       end
     end
   end

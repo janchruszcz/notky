@@ -1,19 +1,11 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[show edit update destroy]
-
-  def index
-    @todos = Todo.rank(:row_order)
-  end
-
-  def show
-  end
+  before_action :set_todo, only: %i[edit update destroy]
 
   def new
     @todo = Todo.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @todo = Todo.new(todo_params)
