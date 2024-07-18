@@ -37,6 +37,11 @@ jobs:
         bundle exec rails db:create
         bundle exec rails db:schema:load
 
+    - name: Compile Tailwind CSS
+      run: |
+        bundle exec rails tailwindcss:install
+        bundle exec rails tailwindcss:build
+
     - name: Run tests
       env:
         RAILS_ENV: test
