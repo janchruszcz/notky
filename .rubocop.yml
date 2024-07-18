@@ -1,0 +1,33 @@
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+
+# Disable the check for top-level documentation
+Style/Documentation:
+  Enabled: false
+
+# Disable the check for missing magic comment
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# If you want to disable all comment-related cops
+Style/CommentAnnotation:
+  Enabled: false
+
+Layout/LeadingCommentSpace:
+  Enabled: false
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+# Disable method length check
+Metrics/MethodLength:
+  Enabled: false
+
+# Disable line length check
+Layout/LineLength:
+  Enabled: false
+
+# Disable block length check
+Metrics/BlockLength:
+  Enabled: false
