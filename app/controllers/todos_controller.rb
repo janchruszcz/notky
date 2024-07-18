@@ -35,7 +35,7 @@ class TodosController < ApplicationController
     @todo.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash[:notice] = 'Todo was successfully destroyed.' }
+      format.turbo_stream { flash.now[:notice] = 'Todo was successfully destroyed.' }
     end
   end
 

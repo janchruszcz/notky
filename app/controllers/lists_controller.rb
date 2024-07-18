@@ -35,7 +35,7 @@ class ListsController < ApplicationController
     @list.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash[:notice] = 'List was successfully destroyed.' }
+      format.turbo_stream { flash.now[:notice] = 'List was successfully destroyed.' }
     end
   end
 

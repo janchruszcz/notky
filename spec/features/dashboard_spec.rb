@@ -27,10 +27,10 @@ RSpec.describe 'Corkboard', type: :feature do
 
     it 'allows the user to create a new list' do
       visit root_path
-      click_button 'add-list'
+      click_link_or_button 'add-list'
 
       fill_in 'list_title', with: 'My New List'
-      click_button 'Create List'
+      click_link_or_button 'Create List'
 
       expect(page).to have_content('List created successfully')
       expect(page).to have_content('My New List')
@@ -41,11 +41,11 @@ RSpec.describe 'Corkboard', type: :feature do
 
       visit root_path
       within "#list_#{list.id}" do
-        click_button "delete-list-#{list.id}"
+        click_link_or_button "delete-list-#{list.id}"
       end
 
       expect(page).to have_content('List deleted successfully')
-      expect(page).not_to have_content(list.title)
+      expect(page).to have_no_content(list.title)
     end
   end
 end
