@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Corkboard', type: :feature do
+RSpec.describe 'Corkboard' do
   let(:user) { create(:user) }
 
   before do

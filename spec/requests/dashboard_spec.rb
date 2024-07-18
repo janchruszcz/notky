@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Dashboard', type: :request do
+RSpec.describe 'Dashboard' do
   describe 'GET /' do
     let(:user) { create(:user) }
 
@@ -21,7 +21,7 @@ RSpec.describe 'Dashboard', type: :request do
       todo4 = list2.todos.create(title: 'Wash the car')
 
       get '/'
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.body).to include(todo1.title)
       expect(response.body).to include(todo2.title)
       expect(response.body).to include(todo3.title)

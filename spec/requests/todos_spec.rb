@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Todos', type: :request do
+RSpec.describe 'Todos' do
   let(:user) { create(:user) }
 
   before do
@@ -19,7 +19,7 @@ RSpec.describe 'Todos', type: :request do
         post todos_path(format: :turbo_stream), params: { todo: todo_params }
       end.to change(Todo, :count).by(1)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include("<turbo-stream action=\"append\" target=\"todos_#{list.id}\">")
       expect(response.body).to include(todo_params[:title])
@@ -35,7 +35,7 @@ RSpec.describe 'Todos', type: :request do
 
       patch todo_path(todo, format: :turbo_stream), params: { todo: { title: updated_title } }
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include("<turbo-stream action=\"replace\" target=\"todo_#{todo.id}\">")
       expect(response.body).to include(updated_title)
@@ -52,7 +52,7 @@ RSpec.describe 'Todos', type: :request do
         delete todo_path(todo, format: :turbo_stream)
       end.to change(Todo, :count).by(-1)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include("<turbo-stream action=\"remove\" target=\"todo_#{todo.id}\">")
       expect(response.body).not_to include(todo.title)

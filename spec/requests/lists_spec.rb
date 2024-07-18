@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Lists', type: :request do
+RSpec.describe 'Lists' do
   let(:user) { create(:user) }
 
   before do
@@ -17,7 +17,7 @@ RSpec.describe 'Lists', type: :request do
         post lists_path(format: :turbo_stream), params: { list: list_params }
       end.to change(List, :count).by(1)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include('<turbo-stream action="append" target="lists">')
       expect(response.body).to include(list_params[:title])
@@ -32,7 +32,7 @@ RSpec.describe 'Lists', type: :request do
         delete list_path(list, format: :turbo_stream)
       end.to change(List, :count).by(-1)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include("<turbo-stream action=\"remove\" target=\"list_#{list.id}\">")
       expect(response.body).not_to include(list.title)
