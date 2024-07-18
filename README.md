@@ -4,7 +4,7 @@
 
 ## About
 
-notky is a simple sticky notes/corkboard-like todo app. It was designed for personal use and built with Ruby on Rails with Hotwire.
+notky is a simple sticky notes/corkboard-like todo app. Designed for personal use, built with Ruby on Rails with Hotwire.
 
 ## Prerequisites
 
