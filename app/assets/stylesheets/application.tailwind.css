@@ -14,7 +14,7 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-b from-slate-400 via-slate-300 to-slate-200;
+    @apply bg-gradient-to-b from-slate-500 via-slate-300 to-slate-200;
   }
 
   input[type="text"] {

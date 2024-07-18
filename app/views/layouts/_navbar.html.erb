@@ -1,11 +1,14 @@
 <div class="my-5 flex justify-between">
     <div>
-        <%= button_to new_list_path, method: :get, data: { turbo_frame: 'modal' }, class: "h-10 w-10 text-white" do %>
+        <%= button_to new_list_path, method: :get, data: { turbo_frame: 'modal' }, class: "h-10 w-10 bg-green-600 rounded-full text-white" do %>
             <%= heroicon('plus') %>
         <% end %>
     </div>
     <h1 class="text-4xl font-medium tracking-wider text-white">notky.io</h1>
-    <div>
+    <div class="flex gap-1">
+        <%= button_to destroy_user_session_path, method: :delete, class: "h-10 w-10 text-white" do %>
+            <%= heroicon('cog-6-tooth') %>
+        <% end %>
         <%= button_to destroy_user_session_path, method: :delete, class: "h-10 w-10 text-white" do %>
             <%= heroicon('arrow-up-circle') %>
         <% end %>
