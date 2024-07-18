@@ -1,5 +1,7 @@
 # notky
 
+![Screenshot](/docs/ss1.png)
+
 ## About
 
 notky is a simple sticky notes/corkboard-like todo app. It was designed for personal use and built with Ruby on Rails with Hotwire.
@@ -10,7 +12,7 @@ Before getting started, make sure you have the following installed:
 
 - Ruby version 3.2.2
 - Rails version 7.1.3.4
-- PostgreSQL
+- SQLite3
 
 ## Installation
 
