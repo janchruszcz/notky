@@ -1,4 +1,4 @@
-<div id="<%= dom_id todo %>" class="flex flex-col gap-3 bg-opacity-100 hover:bg-yellow-300 p-3 rounded shadow-lg w-54 my-3" data-controller="todos">
+<div id="<%= dom_id todo %>" class="flex flex-col gap-3 bg-opacity-100 hover:bg-yellow-300 p-2 rounded shadow-lg w-54 my-3" data-controller="todos">
   <div class="flex justify-between items-center">
 
     <%= form_with model: todo, class: "contents", data: { turbo_frame: dom_id(todo, "title") } do %>
@@ -29,7 +29,7 @@
       <% end %>
     </div>
 
-    <%= button_to todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' }, class: "h-5 w-5 text-red-600 font-medium" do %>
+    <%= button_to todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-todo" do %>
       <%= heroicon('trash') %>
     <% end %>
 

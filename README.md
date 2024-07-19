@@ -4,16 +4,16 @@
 
 ## 🚀 Welcome to Notky!
 
-Notky is a simple todo app that mimics a corkboard or a wall of sticky notes. It's built with Ruby on Rails and Hotwire.
+Sometimes, the old ways work best. Notky brings the swift feel of sticky notes into the digital world.
 
 ## 🎨 What's Notky All About?
 
-Sometimes, the old ways work best. Notky brings the swift feel of sticky notes into the digital world:
+Notky is a simple todo app that mimics a corkboard or a wall of sticky notes. It's built with Ruby on Rails and Hotwire.
 
-📌 Stick digital notes anywhere you like
-🖊️ Scribble, edit, and update your thoughts on the fly
-🗑️ Crumple up and toss away completed tasks (so satisfying!)
-🧲 Drag and drop notes like you're conducting a symphony of productivity
+- 📌 Stick digital notes anywhere you like
+- 🖊️ Scribble, edit, and update your thoughts on the fly
+- 🗑️ Crumple up and toss away completed tasks (so satisfying!)
+- 🧲 Drag and drop notes like you're conducting a symphony of productivity
 
 ## 🛠️ Getting Notky on Your Machine
 
