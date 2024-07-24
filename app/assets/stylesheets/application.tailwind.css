@@ -25,3 +25,21 @@
     @apply rounded-full text-green-600 h-5 w-5 focus:outline-green-600;
   }
 }
+
+@layer utilities {
+  .add-list {
+    @apply h-10 w-10 bg-green-500 text-white rounded-full shadow-lg;
+  }
+
+  .delete-list {
+    @apply h-5 w-5 text-red-600;
+  }
+
+  .add-todo {
+    @apply h-7 w-7 bg-green-600 text-white rounded-full shadow-lg;
+  }
+
+  .delete-todo {
+    @apply h-5 w-5 text-red-600;
+  }
+}

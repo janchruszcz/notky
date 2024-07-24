@@ -14,7 +14,7 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.turbo_stream { flash[:notice] = 'List was successfully created.' }
+        format.turbo_stream { flash[:notice] = 'List created successfully.' }
       else
         format.turbo_stream { flash[:alert] = 'List was not created.' }
       end
@@ -24,7 +24,7 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.turbo_stream { flash[:notice] = 'List was successfully updated.' }
+        format.turbo_stream { flash[:notice] = 'List updated successfully.' }
       else
         format.turbo_stream { flash[:alert] = 'List was not updated.' }
       end
@@ -35,7 +35,7 @@ class ListsController < ApplicationController
     @list.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = 'List was successfully destroyed.' }
+      format.turbo_stream { flash.now[:notice] = 'List deleted successfully.' }
     end
   end
 

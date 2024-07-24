@@ -14,7 +14,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.turbo_stream { flash[:notice] = 'Todo was successfully created.' }
+        format.turbo_stream { flash[:notice] = 'Todo created successfully.' }
       else
         format.turbo_stream { flash[:alert] = 'Todo was not created.' }
       end
@@ -24,7 +24,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.turbo_stream { flash[:notice] = 'Todo was successfully updated.' }
+        format.turbo_stream { flash[:notice] = 'Todo updated successfully.' }
       else
         format.turbo_stream { flash[:alert] = 'Todo was not updated.' }
       end
@@ -35,7 +35,7 @@ class TodosController < ApplicationController
     @todo.destroy!
 
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = 'Todo was successfully destroyed.' }
+      format.turbo_stream { flash.now[:notice] = 'Todo destroyed successfully.' }
     end
   end
 
