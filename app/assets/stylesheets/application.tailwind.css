@@ -2,44 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
-
-*/
-
 @layer base {
   body {
-    @apply bg-gradient-to-b from-slate-500 via-slate-300 to-slate-200;
+    @apply bg-gradient-to-br from-slate-600 via-slate-400 to-slate-300 min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  input[type="text"] {
-    @apply rounded-md bg-transparent text-sm font-medium border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+  /* Form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    @apply rounded-lg bg-white/80 text-sm font-medium
+           border border-gray-300
+           focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent
+           px-3 py-2 transition-all duration-150;
   }
 
   input[type="checkbox"] {
-    @apply rounded-full text-green-600 h-5 w-5 focus:outline-green-600;
+    @apply rounded text-green-600 h-5 w-5
+           focus:ring-2 focus:ring-green-500 focus:ring-offset-0
+           cursor-pointer transition-colors;
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+}
+
+@layer components {
+  /* Button styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2
+           bg-green-600 text-white
+           rounded-lg shadow-lg
+           hover:bg-green-700 hover:shadow-xl
+           focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
+           transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2
+           bg-white text-slate-700
+           border border-slate-300
+           rounded-lg shadow
+           hover:bg-slate-50 hover:border-slate-400
+           focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2
+           transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2
+           bg-red-600 text-white
+           rounded-lg shadow-lg
+           hover:bg-red-700 hover:shadow-xl
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+           transition-all duration-200;
+  }
+
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2
+           focus-visible:ring-sky-500 focus-visible:ring-offset-2;
   }
 }
 
 @layer utilities {
+  /* Legacy button styles (for backwards compatibility) */
   .add-list {
-    @apply h-10 w-10 bg-green-500 text-white rounded-full shadow-lg;
+    @apply h-10 w-10 bg-green-600 text-white rounded-full shadow-lg
+           hover:bg-green-700 hover:shadow-xl transition-all duration-200;
   }
 
   .delete-list {
-    @apply h-5 w-5 text-red-600;
+    @apply h-5 w-5 text-red-600 hover:text-red-700 transition-colors;
   }
 
   .add-todo {
-    @apply h-7 w-7 bg-green-600 text-white rounded-full shadow-lg;
+    @apply h-7 w-7 bg-green-600 text-white rounded-full shadow-lg
+           hover:bg-green-700 transition-all duration-200;
   }
 
   .delete-todo {
-    @apply h-5 w-5 text-red-600;
+    @apply h-5 w-5 text-red-600 hover:text-red-700 transition-colors;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  .animate-complete {
+    animation: complete 0.4s ease-out;
+  }
+
+  /* Drag and drop styles */
+  .sortable-ghost {
+    @apply opacity-40 bg-sky-100 border-2 border-dashed border-sky-400 rounded-lg;
+  }
+
+  .sortable-chosen {
+    @apply shadow-2xl scale-105 rotate-1 z-50;
+  }
+
+  .sortable-drag {
+    @apply cursor-grabbing;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes complete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .note-card {
+    @apply border-2 border-slate-900;
   }
 }
