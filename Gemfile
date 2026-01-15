@@ -56,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'rubocop', require: false
   gem 'rubocop-discourse', require: false
+  gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'shoulda-matchers'
@@ -86,6 +87,11 @@ gem 'tailwindcss-rails', '~> 2.6'
 # Sortable lists
 gem 'ranked-model', '~> 0.4.9'
 
-# Slim JS requests
+# Authentication
 gem 'devise', '~> 4.9'
+
+# Slim JS requests
 gem 'requestjs-rails', '~> 0.0.11'
+
+# View Components for reusable UI
+gem 'view_component', '~> 3.0'

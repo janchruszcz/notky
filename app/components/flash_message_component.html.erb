@@ -1,0 +1,26 @@
+<div
+  data-controller="alert"
+  class="max-w-sm w-full <%= bg_color %> shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
+>
+  <div class="p-4">
+    <div class="flex items-start">
+      <div class="flex-shrink-0">
+        <%= heroicon(icon_name, variant: :solid, options: { class: "h-5 w-5 #{icon_color}" }) %>
+      </div>
+      <div class="ml-3 w-0 flex-1 pt-0.5">
+        <p class="text-sm font-medium <%= text_color %>">
+          <%= @message %>
+        </p>
+      </div>
+      <div class="ml-4 flex-shrink-0 flex">
+        <button
+          data-action="click->alert#close"
+          class="<%= bg_color %> rounded-md inline-flex <%= text_color %> hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          <span class="sr-only">Close</span>
+          <%= heroicon('x-mark', variant: :solid, options: { class: 'h-5 w-5' }) %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
