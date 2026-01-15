@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-full">
   <head>
     <title>notky.io</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Your digital corkboard for organizing tasks and lists">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" %>
     <%= stylesheet_link_tag "https://ga.jspm.io/npm:flatpickr@4.6.9/dist/flatpickr.min.css" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class='container mx-auto mt-5 px-5 flex flex-col h-full'>
-      <%= turbo_frame_tag 'modal' %>
-      <%= render 'layouts/flash' %>
-      <%= render 'layouts/navbar' %>
-      <%= yield %>
-    </main>
+  <body class="h-full antialiased">
+    <%# Header bar %>
+    <%= render 'layouts/navbar' if user_signed_in? %>
+
+    <%# Flash messages %>
+    <%= render 'layouts/flash' %>
+
+    <%# Modal container %>
+    <%= turbo_frame_tag 'modal' %>
+
+    <%# Main content %>
+    <%= yield %>
   </body>
 </html>

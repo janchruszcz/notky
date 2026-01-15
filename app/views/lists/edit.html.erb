@@ -1,8 +1,45 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing list</h1>
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-backdrop" data-controller="turbo-modal" data-action="turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click->turbo-modal#closeBackground">
+    <div class="modal-content sticky-note note-yellow" data-turbo-modal-target="modal" data-action="click->turbo-modal#stopPropagation">
+      <%# Push pin %>
+      <div class="push-pin"></div>
 
-  <%= render "form", list: @list %>
+      <%# Header %>
+      <div class="pt-6 pb-4 px-6 border-b border-cork-200/50">
+        <h2 class="note-title text-center text-2xl">Edit List</h2>
+      </div>
 
-  <%= link_to "Show this list", @list, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to lists", lists_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-</div>
+      <%# Form %>
+      <div class="p-6">
+        <%= form_with model: @list, class: "space-y-4" do |form| %>
+          <% if @list.errors.any? %>
+            <div class="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
+              <ul class="list-disc list-inside space-y-1">
+                <% @list.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div>
+            <label for="list_title" class="block text-sm font-medium text-cork-700 mb-2">List Title</label>
+            <%= form.text_field :title,
+                class: "w-full bg-white/80 border-2 border-cork-300 focus:border-cork-500 focus:ring-0 rounded-lg px-4 py-3 font-handwriting text-xl text-cork-800 placeholder:text-cork-400",
+                placeholder: "e.g., Shopping List, Work Tasks...",
+                autofocus: true,
+                required: true
+            %>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="button" data-action="turbo-modal#hideModal" class="btn-secondary">
+              Cancel
+            </button>
+            <%= form.submit "Save Changes", class: "btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

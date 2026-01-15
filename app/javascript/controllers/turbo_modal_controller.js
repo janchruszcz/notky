@@ -1,40 +1,50 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="turbo-modal"
+// Modal controller with backdrop click handling
 export default class extends Controller {
   static targets = ["modal"]
 
-  // hide modal
-  // action: "turbo-modal#hideModal"
+  connect() {
+    // Prevent body scroll when modal is open
+    document.body.classList.add("overflow-hidden")
+  }
+
+  disconnect() {
+    document.body.classList.remove("overflow-hidden")
+  }
+
+  // Hide modal
   hideModal() {
     this.element.parentElement.removeAttribute("src")
     // Remove src reference from parent frame element
     // Without this, turbo won't re-open the modal on subsequent click
-    this.modalTarget.remove()
+    this.element.remove()
   }
 
-  // hide modal on successful form submission
-  // action: "turbo:submit-end->turbo-modal#submitEnd"
+  // Hide modal on successful form submission
   submitEnd(e) {
     if (e.detail.success) {
       this.hideModal()
     }
   }
 
-  // hide modal when clicking ESC
-  // action: "keyup@window->turbo-modal#closeWithKeyboard"
+  // Hide modal when clicking ESC
   closeWithKeyboard(e) {
-    if (e.code == "Escape") {
+    if (e.code === "Escape") {
       this.hideModal()
     }
   }
 
-  // hide modal when clicking outside of modal
-  // action: "click@window->turbo-modal#closeBackground"
+  // Hide modal when clicking backdrop
   closeBackground(e) {
-    if (e && this.modalTarget.contains(e.target)) {
-      return
+    // Only close if clicking the backdrop itself, not the modal content
+    if (e.target === this.element) {
+      this.hideModal()
     }
-    this.hideModal()
+  }
+
+  // Stop propagation when clicking modal content
+  stopPropagation(e) {
+    e.stopPropagation()
   }
 }

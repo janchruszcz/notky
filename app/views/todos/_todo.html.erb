@@ -1,58 +1,64 @@
 <div
   id="<%= dom_id todo %>"
-  class="
-    group/todo
-    flex items-start gap-3
-    p-2.5 rounded-lg
-    bg-white/40 hover:bg-white/60
-    border border-transparent hover:border-yellow-300
-    transition-all duration-150
-    <%= 'opacity-60' if todo.completed? %>
-  "
-  data-controller="todos"
-  data-completed="<%= todo.completed? %>"
+  class="todo-item group/todo <%= 'completed' if todo.completed? %>"
+  data-controller="todo-item"
+  data-todo-item-completed-value="<%= todo.completed? %>"
 >
   <%# Checkbox %>
   <div class="flex-shrink-0 pt-0.5">
-    <%= form_with model: todo, class: "contents", data: { controller: "auto-submit" }, local: false do |form| %>
-      <%= turbo_frame_tag dom_id(todo, "completed") do %>
-        <%= form.check_box :completed,
-            id: dom_id(todo, "completed"),
-            class: "h-5 w-5 rounded-full border-2 border-slate-300 text-green-600 focus:ring-green-500 focus:ring-offset-0 cursor-pointer transition-colors",
-            data: { action: "auto-submit#submit click->todos#toggleCrossOut", "todos-target": "checkbox" }
-        %>
-      <% end %>
+    <%= form_with model: todo, class: "contents", data: { controller: "auto-submit" } do |form| %>
+      <%= form.check_box :completed,
+          class: "h-5 w-5 rounded-full border-2 border-cork-400 text-green-600 focus:ring-green-500 focus:ring-offset-0 cursor-pointer transition-all duration-200",
+          data: { action: "auto-submit#submit todo-item#toggle", "todo-item-target": "checkbox" }
+      %>
     <% end %>
   </div>
 
-  <%# Content %>
+  <%# Content with inline editing %>
   <div class="flex-1 min-w-0">
-    <%= form_with model: todo, class: "contents", data: { turbo_frame: dom_id(todo, "title") } do %>
-      <%= turbo_frame_tag dom_id(todo, "title"), data: { controller: "inline-edit" } do %>
-        <p
-          data-todos-target="paragraph"
-          class="text-sm font-medium text-slate-700 <%= 'line-through text-slate-400' if todo.completed? %>"
-        >
-          <%= link_to todo.title, edit_todo_path(todo), data: { turbo_frame: 'modal' }, class: "hover:text-slate-900 transition-colors" %>
-        </p>
+    <div
+      data-controller="inline-edit"
+      data-inline-edit-url-value="<%= todo_path(todo) %>"
+      class="relative"
+    >
+      <%# Display mode %>
+      <p
+        class="todo-text cursor-text hover:bg-white/40 px-1 py-0.5 -mx-1 rounded transition-colors"
+        data-inline-edit-target="display"
+        data-todo-item-target="text"
+        data-action="click->inline-edit#edit"
+        title="Click to edit"
+      >
+        <%= todo.title %>
+      </p>
+
+      <%# Edit mode (hidden by default) %>
+      <%= form_with model: todo, class: "hidden", data: { "inline-edit-target": "form" } do |form| %>
+        <%= form.text_field :title,
+            class: "w-full bg-white/80 border-0 border-b-2 border-cork-400 focus:border-cork-600 focus:ring-0 font-handwriting text-lg text-cork-700 px-1 py-0.5 -mx-1 rounded-t",
+            data: {
+              "inline-edit-target": "input",
+              action: "blur->inline-edit#save keydown.enter->inline-edit#save keydown.escape->inline-edit#cancel"
+            }
+        %>
       <% end %>
-    <% end %>
+    </div>
 
     <%# Due date badge %>
     <% if todo.due_date.present? %>
-      <div class="mt-1.5 flex items-center gap-1">
+      <div class="mt-1 flex items-center gap-1">
         <% if todo.overdue? %>
-          <span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700">
+          <span class="badge-overdue">
             <%= heroicon('exclamation-circle', variant: :mini, options: { class: 'h-3 w-3' }) %>
             <span>Overdue</span>
           </span>
         <% elsif todo.due_soon? %>
-          <span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+          <span class="badge-soon">
             <%= heroicon('clock', variant: :mini, options: { class: 'h-3 w-3' }) %>
             <span><%= todo.due_date.strftime('%b %d') %></span>
           </span>
         <% else %>
-          <span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+          <span class="badge-normal">
             <%= heroicon('calendar', variant: :mini, options: { class: 'h-3 w-3' }) %>
             <span><%= todo.due_date.strftime('%b %d') %></span>
           </span>
@@ -61,17 +67,19 @@
     <% end %>
   </div>
 
-  <%# Actions %>
-  <div class="flex-shrink-0 flex items-center gap-1 opacity-0 group-hover/todo:opacity-100 transition-opacity">
-    <%= form_with model: todo, class: "contents" do |form| %>
+  <%# Actions - visible on hover %>
+  <div class="flex-shrink-0 flex items-center gap-0.5 opacity-0 group-hover/todo:opacity-100 transition-opacity duration-150">
+    <%# Date picker %>
+    <%= form_with model: todo, class: "contents", data: { controller: "auto-submit" } do |form| %>
       <%= form.date_field :due_date,
-          class: "w-8 h-8 p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-yellow-200/50 cursor-pointer border-none bg-transparent",
+          class: "w-7 h-7 p-1 rounded-full text-cork-400 hover:text-cork-600 hover:bg-white/50 cursor-pointer border-none bg-transparent text-xs",
           data: { controller: "flatpickr", action: "change->auto-submit#submit" },
           title: "Set due date"
       %>
     <% end %>
 
-    <%= button_to todo_path(todo), method: :delete, data: { turbo_confirm: 'Delete this task?' }, class: "p-1.5 rounded-full text-slate-400 hover:text-red-600 hover:bg-yellow-200/50 transition-colors" do %>
+    <%# Delete button %>
+    <%= button_to todo_path(todo), method: :delete, data: { turbo_confirm: 'Delete this task?' }, class: "p-1 rounded-full text-cork-400 hover:text-red-600 hover:bg-white/50 transition-colors" do %>
       <%= heroicon('trash', variant: :mini, options: { class: 'h-4 w-4' }) %>
     <% end %>
   </div>

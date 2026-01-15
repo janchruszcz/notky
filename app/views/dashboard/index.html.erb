@@ -1,48 +1,59 @@
-<main class="min-h-screen p-4 sm:p-6 lg:p-8" role="main" aria-label="Task board">
+<main class="min-h-screen" role="main" aria-label="Task board">
   <h1 class="sr-only">Your Task Board</h1>
 
   <% if @lists.empty? %>
-    <div class="flex items-center justify-center min-h-[50vh]">
-      <div class="text-center">
-        <div class="mx-auto h-16 w-16 text-slate-400 mb-4">
-          <%= heroicon('clipboard-document-list', variant: :outline, options: { class: 'h-16 w-16' }) %>
+    <%# Empty state %>
+    <div class="flex items-center justify-center min-h-[70vh] p-6">
+      <div class="sticky-note note-yellow max-w-sm text-center animate-pin-drop">
+        <div class="push-pin"></div>
+        <div class="pt-8 pb-6 px-6">
+          <div class="mx-auto h-16 w-16 text-cork-400 mb-4">
+            <%= heroicon('clipboard-document-list', variant: :outline, options: { class: 'h-16 w-16' }) %>
+          </div>
+          <h2 class="note-title text-2xl mb-2">No lists yet</h2>
+          <p class="note-text text-cork-600 mb-6">Create your first list to pin it to the board!</p>
+          <%= button_to new_list_path, method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "btn-primary" do %>
+            <%= heroicon('plus', variant: :mini, options: { class: 'h-5 w-5' }) %>
+            <span>Create Your First List</span>
+          <% end %>
         </div>
-        <h2 class="text-xl font-semibold text-slate-700 mb-2">No lists yet</h2>
-        <p class="text-slate-500 mb-6">Create your first list to get started</p>
-        <%= button_to new_list_path, method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg shadow-lg hover:bg-green-700 transition-colors" do %>
-          <%= heroicon('plus', variant: :mini, options: { class: 'h-5 w-5' }) %>
-          <span>Create List</span>
-        <% end %>
       </div>
     </div>
   <% else %>
-    <section aria-label="Task lists">
+    <%# Board with lists %>
+    <section class="p-4 sm:p-6 lg:p-8 max-w-[1800px] mx-auto" aria-label="Task lists">
       <ul
         id="lists"
         data-controller="sortable"
         class="
-          grid gap-4 sm:gap-6
+          grid gap-6 sm:gap-8
           grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
           xl:grid-cols-4
-          2xl:grid-cols-5
           auto-rows-min
         "
       >
-        <% @lists.each do |list| %>
-          <li data-sortable-update-url="<%= sort_list_path(list) %>" class="animate-fade-in">
+        <% @lists.each_with_index do |list, index| %>
+          <li
+            data-sortable-update-url="<%= sort_list_path(list) %>"
+            class="animate-fade-in"
+            style="animation-delay: <%= index * 50 %>ms"
+          >
             <%= render list %>
           </li>
         <% end %>
+
+        <%# New list card %>
+        <li class="animate-fade-in" style="animation-delay: <%= @lists.count * 50 %>ms">
+          <%= button_to new_list_path, method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "new-list-card w-full h-full" do %>
+            <div class="text-cork-500">
+              <%= heroicon('plus', variant: :outline, options: { class: 'h-12 w-12 mb-2' }) %>
+              <span class="note-text text-lg">Add New List</span>
+            </div>
+          <% end %>
+        </li>
       </ul>
     </section>
-
-    <div class="flex justify-center mt-8 mb-4">
-      <%= button_to new_list_path, method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "group flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 hover:shadow-xl transition-all duration-200" do %>
-        <%= heroicon('plus', variant: :mini, options: { class: 'h-5 w-5 group-hover:rotate-90 transition-transform duration-200' }) %>
-        <span class="hidden sm:inline">Add List</span>
-      <% end %>
-    </div>
   <% end %>
 </main>

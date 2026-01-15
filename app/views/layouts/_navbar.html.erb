@@ -1,16 +1,61 @@
-<div class="my-5 flex justify-between">
-    <div>
-        <%= button_to new_list_path, method: :get, data: { turbo_frame: 'modal' }, class: "h-10 w-10 bg-green-600 rounded-full text-white" do %>
-            <%= heroicon('plus') %>
+<header class="header-bar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-14">
+      <%# Logo %>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-cork-500 flex items-center justify-center shadow-inner">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </div>
+        <h1 class="text-xl font-semibold text-white tracking-wide">notky</h1>
+      </div>
+
+      <%# Right side actions %>
+      <div class="flex items-center gap-2">
+        <%# Add new list button %>
+        <%= button_to new_list_path, method: :get, params: { user_id: current_user.id }, data: { turbo_frame: 'modal' }, class: "btn-ghost text-white hover:bg-white/10" do %>
+          <%= heroicon('plus', variant: :solid, options: { class: 'h-5 w-5' }) %>
+          <span class="sr-only">Add new list</span>
         <% end %>
+
+        <%# User menu %>
+        <div class="relative" data-controller="dropdown">
+          <button
+            type="button"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white/90 hover:bg-white/10 transition-colors"
+            data-action="click->dropdown#toggle"
+            data-dropdown-target="button"
+          >
+            <div class="w-7 h-7 rounded-full bg-cork-500 flex items-center justify-center text-sm font-medium text-white">
+              <%= current_user.email[0].upcase %>
+            </div>
+            <span class="hidden sm:inline text-sm font-medium"><%= current_user.email.split('@').first %></span>
+            <%= heroicon('chevron-down', variant: :mini, options: { class: 'h-4 w-4 text-white/70' }) %>
+          </button>
+
+          <%# Dropdown menu %>
+          <div
+            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-1 z-50 border border-cork-200"
+            data-dropdown-target="menu"
+          >
+            <div class="px-4 py-2 border-b border-cork-100">
+              <p class="text-xs text-cork-500">Signed in as</p>
+              <p class="text-sm font-medium text-cork-800 truncate"><%= current_user.email %></p>
+            </div>
+
+            <%= link_to edit_user_registration_path, class: "flex items-center gap-2 px-4 py-2 text-sm text-cork-700 hover:bg-cork-50 transition-colors" do %>
+              <%= heroicon('cog-6-tooth', variant: :mini, options: { class: 'h-4 w-4 text-cork-400' }) %>
+              <span>Settings</span>
+            <% end %>
+
+            <%= button_to destroy_user_session_path, method: :delete, class: "w-full flex items-center gap-2 px-4 py-2 text-sm text-cork-700 hover:bg-cork-50 transition-colors" do %>
+              <%= heroicon('arrow-right-on-rectangle', variant: :mini, options: { class: 'h-4 w-4 text-cork-400' }) %>
+              <span>Sign out</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <h1 class="text-4xl font-medium tracking-wider text-white antialiased">notky.io</h1>
-    <div class="flex gap-1">
-        <%= button_to destroy_user_session_path, method: :delete, class: "h-10 w-10 text-white" do %>
-            <%= heroicon('cog-6-tooth') %>
-        <% end %>
-        <%= button_to destroy_user_session_path, method: :delete, class: "h-10 w-10 text-white" do %>
-            <%= heroicon('arrow-up-circle') %>
-        <% end %>
-    </div>
-</div>
+  </div>
+</header>
