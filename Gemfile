@@ -95,3 +95,6 @@ gem 'requestjs-rails', '~> 0.0.11'
 
 # View Components for reusable UI
 gem 'view_component', '~> 3.0'
+
+# Security
+gem 'rack-attack', '~> 6.7'
